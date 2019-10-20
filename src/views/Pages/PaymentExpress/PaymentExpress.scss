@@ -1,0 +1,88 @@
+.card {
+    border: none;
+}
+
+.payment-resume-table {
+    width: 100%;
+    margin-bottom: 30px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    &.next {
+        float: left!important;
+    }
+    .border-bot {
+        border-bottom: 1px solid #dadada;
+    }
+    .resume-title {
+        line-height: 18px;
+        font-size: 11px;
+        color: #4d4d4d;
+        text-transform: uppercase;
+        &.product-title {
+            width: 210px;
+            text-align: left;
+            border: 0;
+        }
+        &.quantity-title {
+            width: 60px;
+        }
+        &.subtotal-title {
+            width: 90px;
+        }
+    }
+    .info-product {
+        padding: 20px 0 20px 0;
+        position: relative;
+        max-width: 210px;
+    }
+    .informations {
+        width: 100%;
+        float: right!important;
+        color: #4d4d4d;
+        font-size: 13px;
+        line-height: 15.6px;
+    }
+    .thumbnail {
+        width: 40px;
+        float: left!important;
+        margin-right: 5px;
+        border: 1px solid transparent;
+    }
+    .thumbnail-product {
+        max-width: 38px;
+        height: auto;
+    }
+    .unity, .payment-resume-table .subtotal, .payment-resume-table .values {
+        text-align: center;
+        font-size: 13px;
+        color: #4d4d4d;
+    }
+    .resume-right {
+        float: right !important;
+        width: 220px;
+        padding-left: 20px;
+    } 
+    .resume-column {
+        text-align: right;
+        width: 100%;
+        float: left !important;
+        line-height: 16px;
+        font-size: 13px;
+        color: #4d4d4d;
+    }
+    .description {
+        float: left!important;
+        width: 40%;
+        text-align: left;
+    }
+    .result {
+        float: left!important;
+        width: 55%;
+        text-align: right;
+        padding-right: 10px;
+        &.t {
+            font-weight: 700;
+            color: #6a6a6a;
+        }
+    }
+}

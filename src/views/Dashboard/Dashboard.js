@@ -14,7 +14,7 @@ class Dashboard extends Component {
         { data: [78, 81, 80, 45, 34, 12, 40], label: 'linkedin' },
         { data: [35, 23, 56, 22, 97, 23, 64], label: 'google' },
       ];
-    
+
       const dataset = socialBoxData[dataSetNo];
       const data = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -60,15 +60,15 @@ class Dashboard extends Component {
 
     return (
       <div className="animated fadeIn">
-         <Row>
-            <Col xs={12} sm={6} md={5}>
-              <Widget03 dataBox={() => ({ variant: 'Sapatênis', friends: '89k', feeds: '459' })} >
-                <div className="chart-wrapper">
-                  <Line data={makeSocialBoxData(0)} options={socialChartOpts} height={90} />
-                </div>
-              </Widget03>
-            </Col>
-          </Row>
+        <Row>
+          <Col xs={12} sm={6} md={5}>
+            <Widget03 dataBox={() => ({ variant: 'Sapatênis', friends: '89k', feeds: '79k' })} >
+              <div className="chart-wrapper">
+                <Line data={makeSocialBoxData(0)} options={socialChartOpts} height={90} />
+              </div>
+            </Widget03>
+          </Col>
+        </Row>
       </div>
     );
   }

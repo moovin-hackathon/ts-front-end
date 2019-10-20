@@ -1,14 +1,26 @@
 import React, { Component } from 'react';
-import { Badge, Card, CardBody, Col, Pagination, PaginationItem, PaginationLink, Row, Table, Button } from 'reactstrap';
+import axios from 'axios'
+import { Badge, Card, CardBody, Col, Row, Table, Button } from 'reactstrap';
 import './Announcement.scss'
 
 class Create extends Component {
 
-  removeAnnouncement = async () => {
-    console.log('caiu')
+  state = {
+    announcements: null,
+    status: 'success'
   }
+  removeAnnouncement = async () => {
+    const { status } = this.state
+    this.setState({ status: status === 'success' ? 'danger' : 'success' })
+  }
+  componentWillMount = async () => {
+    const announcements = await axios.get('http://localhost:3333/camapaigns')
 
+    this.setState({ announcements: announcements.data })
+  }
   render() {
+    const { announcements, status } = this.state
+    console.log(new Date(announcements))
     return (
       <div className="animated fadeIn">
         <Row>
@@ -26,88 +38,28 @@ class Create extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Samppa Nori</td>
-                      <td>2012/01/01</td>
-                      <td>Member</td>
-                      <td>
-                        <Badge color="success">Active</Badge>
-                      </td>
-                      <td>
-                        <Button type="reset" size="sm" onClick={this.removeAnnouncement} color="danger"><i className="fa fa-ban"></i> Cancelar </Button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Estavan Lykos</td>
-                      <td>2012/02/01</td>
-                      <td>Staff</td>
-                      <td>
-                        <Badge color="danger">Banned</Badge>
-                      </td>
-                      <td>
-                        <Button type="reset" size="sm" color="danger"><i className="fa fa-ban"></i> Cancelar </Button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Chetan Mohamed</td>
-                      <td>2012/02/01</td>
-                      <td>Admin</td>
-                      <td>
-                        <Badge color="secondary">Inactive</Badge>
-                      </td>
-                      <td>
-                        <Button type="reset" size="sm" color="danger"><i className="fa fa-ban"></i> Cancelar </Button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Derick Maximinus</td>
-                      <td>2012/03/01</td>
-                      <td>Member</td>
-                      <td>
-                        <Badge color="warning">Pending</Badge>
-                      </td>
-                      <td>
-                        <Button type="reset" size="sm" color="danger"><i className="fa fa-ban"></i> Cancelar </Button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Friderik Dávid</td>
-                      <td>2012/01/21</td>
-                      <td>Staff</td>
-                      <td>
-                        <Badge color="success">Active</Badge>
-                      </td>
-                      <td>
-                        <Button type="reset" size="sm" color="danger"><i className="fa fa-ban"></i> Cancelar </Button>
-                      </td>
-                    </tr>
+                    {announcements && announcements.map((announcement) => (
+                      <tr>
+                        <td>{announcement.name}</td>
+                        <td>{announcement.date_start.split('T')[0]}</td>
+                        <td>{announcement.date_end.split('T')[0]}</td>
+                        <td>
+                          <Badge color={status}>{status === "success" ? "ativo" : "inativo"}</Badge>
+                        </td>
+                        <td>
+                          <Button type="reset" size="sm" onClick={this.removeAnnouncement} color={status === "success" ? "danger" : "success"}><i className="fa fa-ban"></i> {status === "success" ? "pausar" : "ativar"} </Button>
+                        </td>
+                      </tr>
+                    ))
+                    }
+
                   </tbody>
                 </Table>
-                <Pagination>
-                  <PaginationItem>
-                    <PaginationLink previous tag="button"></PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem active>
-                    <PaginationLink tag="button">1</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink tag="button">2</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink tag="button">3</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink tag="button">4</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink next tag="button"></PaginationLink>
-                  </PaginationItem>
-                </Pagination>
               </CardBody>
             </Card>
           </Col>
         </Row>
-      </div>
+      </div >
     );
   }
 }
